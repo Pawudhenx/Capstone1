@@ -13,13 +13,13 @@ def extract_data(path: str, delete_index: bool = True) -> pd.DataFrame:
         pd.DataFrame
     """
     if not os.path.exists(path):
-        raise FileNotFoundError(f"❌ File tidak ditemukan di path: {path}")
+        raise FileNotFoundError(f"File tidak ditemukan di path: {path}")
 
     df = pd.read_csv(path)
     if delete_index and 'Unnamed: 0' in df.columns:
         df = df.drop(columns=['Unnamed: 0'])
 
-    print(f"✅ File berhasil dibaca dari: {path}")
+    print(f"File berhasil dibaca dari: {path}")
     return df
 
 
@@ -28,7 +28,7 @@ def data_demographi(df: pd.DataFrame):
     """
     Menampilkan analisis demografi dataset produk.
     """
-    print("\n===== 📊 DATA DEMOGRAFI PRODUK =====")
+    print("\n===== DATA DEMOGRAFI PRODUK =====")
 
     # --- Struktur Data
     print(f"\nJumlah baris : {df.shape[0]}")
@@ -39,7 +39,7 @@ def data_demographi(df: pd.DataFrame):
     # --- Missing Values
     print("\n--- Missing Value per Kolom ---")
     missing = df.isnull().sum()
-    print(missing[missing > 0] if missing.sum() > 0 else "Tidak ada missing values ✅")
+    print(missing[missing > 0] if missing.sum() > 0 else "Tidak ada missing values")
 
     # --- Distribusi Kategori
     if 'main_category' in df.columns:
@@ -54,11 +54,11 @@ def data_demographi(df: pd.DataFrame):
     if 'ratings' in df.columns:
         print("\n--- Statistik Rating ---")
         avg_rating = df['ratings'].mean()
-        print(f"📈 Rata-rata rating keseluruhan: {avg_rating:.2f}")
+        print(f"Rata-rata rating keseluruhan: {avg_rating:.2f}")
 
     if 'no_of_ratings' in df.columns:
         avg_reviews = df['no_of_ratings'].mean()
-        print(f"💬 Rata-rata jumlah review per produk: {avg_reviews:.0f}")
+        print(f"Rata-rata jumlah review per produk: {avg_reviews:.0f}")
 
     # --- Statistik Harga & Diskon
     # --- Hitung Persentase Diskon & Tambahkan Kolom Baru ---
@@ -74,7 +74,7 @@ def data_demographi(df: pd.DataFrame):
         df.loc[(df['discount_percent'] < 0) | (df['discount_percent'] > 100), 'discount_percent'] = np.nan
 
         avg_discount = df['discount_percent'].mean()
-        print(f"💸 Rata-rata diskon produk: {avg_discount:.2f}%")
+        print(f"Rata-rata diskon produk: {avg_discount:.2f}%")
 
     # --- Hitung Persentase Diskon & Cari Produk Diskon Terbesar ---
     if 'discount_price(Rupee)' in df.columns and 'actual_price(Rupee)' in df.columns:
@@ -91,7 +91,7 @@ def data_demographi(df: pd.DataFrame):
 
 
         # Produk dengan diskon terbesar
-        print("\n💸 Top 5 Produk dengan Diskon Terbesar ---")
+        print("Top 5 Produk dengan Diskon Terbesar ---")
         top_discount = (
             df[['name', 'main_category', 'discount_price(Rupee)', 'actual_price(Rupee)', 'discount_percent']]
             .sort_values(by='discount_percent', ascending=False)

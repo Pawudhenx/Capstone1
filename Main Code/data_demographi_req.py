@@ -13,13 +13,13 @@ def extract_data(path: str, delete_index: bool = True) -> pd.DataFrame:
         pd.DataFrame
     """
     if not os.path.exists(path):
-        raise FileNotFoundError(f"❌ File tidak ditemukan di path: {path}")
+        raise FileNotFoundError(f"File tidak ditemukan di path: {path}")
 
     df = pd.read_csv(path)
     if delete_index and 'Unnamed: 0' in df.columns:
         df = df.drop(columns=['Unnamed: 0'])
 
-    print(f"✅ File berhasil dibaca dari: {path}")
+    print(f"File berhasil dibaca dari: {path}")
     return df
 
 
@@ -28,11 +28,11 @@ def data_demographi(df: pd.DataFrame):
     """
     Analisis demografi dataset perusahaan & pekerjaan.
     """
-    print("=== 📊 DEMOGRAFI DATA PERUSAHAAN ===")
+    print("=== DEMOGRAFI DATA PERUSAHAAN ===")
     print(f"Jumlah baris: {df.shape[0]}")
     print(f"Jumlah kolom: {df.shape[1]}")
 
-    print("\n--- 🔍 Missing Values ---")
+    print("\n--- Missing Values ---")
     print(df.isnull().sum())
 
     # --- Statistik Rating Perusahaan ---
@@ -40,7 +40,7 @@ def data_demographi(df: pd.DataFrame):
         df['company_rating'] = pd.to_numeric(df['company_rating'], errors='coerce')
         # Top 5 perusahaan dengan rating tertinggi
         top_rated = df[['company', 'company_rating']].dropna().sort_values(by='company_rating', ascending=False).head(5)
-        print("\n🏆 Top 5 Perusahaan dengan Rating Tertinggi:")
+        print("Top 5 Perusahaan dengan Rating Tertinggi:")
         print(top_rated.to_string(index=False))
 
     # --- Distribusi Lokasi ---
@@ -50,7 +50,7 @@ def data_demographi(df: pd.DataFrame):
 
     # --- Industri Perusahaan ---
     if 'company_industry' in df.columns:
-        print("\n--- 🏭 5 Industri Perusahaan Terbanyak ---")
+        print("--- 5 Industri Perusahaan Terbanyak ---")
         print(df['company_industry'].value_counts().head(5))
 
     # --- Tahun Berdiri Perusahaan ---
@@ -63,7 +63,7 @@ def data_demographi(df: pd.DataFrame):
 
     # --- Pendapatan Perusahaan ---
     if 'company_revenue' in df.columns:
-        print("\n--- 💰 Distribusi Pendapatan Perusahaan ---")
+        print("\n--- Distribusi Pendapatan Perusahaan ---")
         print(df['company_revenue'].value_counts().head(5))
 
 

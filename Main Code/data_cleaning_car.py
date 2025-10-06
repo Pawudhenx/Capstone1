@@ -19,7 +19,7 @@ if os.path.exists(input_path):
         df = df.drop(columns=['Unnamed: 0'])
     print("✅ File ditemukan dan berhasil dibaca.")
 else:
-    raise FileNotFoundError(f"❌ File tidak ditemukan di: {input_path}")
+    raise FileNotFoundError(f"File tidak ditemukan di: {input_path}")
 
 # === 3. TRANSFORM DATA ===
 
@@ -61,7 +61,7 @@ for col in rename_map.values():
 # === 4. SIMPAN DAN TAMPILKAN HASIL ===
 df.to_csv(output_path, index=False)
 
-print(f"\n✅ Data berhasil dibersihkan dan disimpan ke:\n{output_path}")
+print(f"Data berhasil dibersihkan dan disimpan ke:\n{output_path}")
 
 # Tampilkan ringkasan hasil
 print("\n===== INFORMASI DATA CLEANED =====")
