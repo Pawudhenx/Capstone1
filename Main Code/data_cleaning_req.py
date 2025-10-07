@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-# === 1. SETUP PATH OTOMATIS ===
+# 1. SETUP PATH OTOMATIS
 # Cari folder base di mana file .py ini berada
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -21,14 +21,14 @@ if os.path.exists(input_path):
 else:
     raise FileNotFoundError(f"File tidak ditemukan di: {input_path}")
 
-# === 3. TRANSFORM DATA ===
+# 3. TRANSFORM DATA
 
 df['company_founded'] = pd.to_numeric(df['company_founded'], errors='coerce').astype('Int64')
 
 df['dates'] = pd.to_datetime(df['dates'], errors='coerce', utc=True)
 df['dates'] = df['dates'].dt.tz_convert('Asia/Jakarta')
 
-# === 4. SIMPAN DAN TAMPILKAN HASIL ===
+# 4. SIMPAN DAN TAMPILKAN HASIL
 df.to_csv(output_path, index=False)
 
 print(f"Data berhasil dibersihkan dan disimpan ke:\n{output_path}")

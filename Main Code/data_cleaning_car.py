@@ -1,29 +1,29 @@
 import pandas as pd
 import os
 
-# === 1. SETUP PATH OTOMATIS ===
+# 1. SETUP PATH 
 # Cari folder base di mana file .py ini berada
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Path otomatis ke file input & output
+# Path file input dan output
 input_path = os.path.join(base_dir, "../Raw Data/Car Parts.csv")
 output_path = os.path.join(base_dir, "../Cleaned Data/CarParts_Clean.csv")
 
 # Buat folder output kalau belum ada
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-# === 2. EXTRACT DATA ===
+# 2. EXTRACT DATA 
 if os.path.exists(input_path):
     df = pd.read_csv(input_path)
     if 'Unnamed: 0' in df.columns:
         df = df.drop(columns=['Unnamed: 0'])
-    print("✅ File ditemukan dan berhasil dibaca.")
+    print("File ditemukan dan berhasil dibaca.")
 else:
     raise FileNotFoundError(f"File tidak ditemukan di: {input_path}")
 
-# === 3. TRANSFORM DATA ===
+# 3. TRANSFORM DATA
 
-# --- ratings ---
+# --- ratings 
 if 'ratings' in df.columns:
     df['ratings'] = (
         df['ratings'].astype(str)
@@ -31,7 +31,7 @@ if 'ratings' in df.columns:
         .pipe(pd.to_numeric, errors='coerce')
     )
 
-# --- no_of_ratings ---
+# no_of_ratings
 if 'no_of_ratings' in df.columns:
     df['no_of_ratings'] = (
         df['no_of_ratings']
@@ -41,14 +41,14 @@ if 'no_of_ratings' in df.columns:
         .astype('Int64')
     )
 
-# --- rename kolom harga ---
+# rename kolom harga 
 rename_map = {
     'discount_price': 'discount_price(Rupee)',
     'actual_price': 'actual_price(Rupee)'
 }
 df.rename(columns=rename_map, inplace=True)
 
-# --- bersihkan simbol ₹ dan koma ---
+# --- bersihkan simbol currency dan koma ---
 for col in rename_map.values():
     if col in df.columns:
         df[col] = (

@@ -2,15 +2,10 @@ import pandas as pd
 import numpy as np
 import os
 
-# =============== 1. EXTRACT DATA ===============
+# 1. EXTRACT DATA
 def extract_data(path: str, delete_index: bool = True) -> pd.DataFrame:
     """
-    Membaca CSV ke DataFrame.
-    Parameters:
-        path (str) : lokasi file CSV
-        delete_index (bool) : hapus kolom index jika ada
-    Returns:
-        pd.DataFrame
+
     """
     if not os.path.exists(path):
         raise FileNotFoundError(f"File tidak ditemukan di path: {path}")
@@ -23,7 +18,7 @@ def extract_data(path: str, delete_index: bool = True) -> pd.DataFrame:
     return df
 
 
-# =============== 2. DATA DEMOGRAFI ===============
+# 2. DATA DEMOGRAFI
 def data_demographi(df: pd.DataFrame):
     """
     Menampilkan analisis demografi dataset produk.
@@ -119,7 +114,7 @@ def data_demographi(df: pd.DataFrame):
     print(df.head(3))
 
 
-# =============== 3. MAIN PROGRAM ===============
+# 3. MAIN PROGRAM
 if __name__ == "__main__":
     # Lokasi file hasil cleaning
     base_dir = os.path.dirname(os.path.abspath(__file__))

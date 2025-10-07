@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-# =============== 1. EXTRACT DATA ===============
+# 1. EXTRACT DATA
 def extract_data(path: str, delete_index: bool = True) -> pd.DataFrame:
     """
     Membaca CSV ke DataFrame.
@@ -23,7 +23,7 @@ def extract_data(path: str, delete_index: bool = True) -> pd.DataFrame:
     return df
 
 
-# =============== 2. DATA DEMOGRAFI ===============
+# 2. DATA DEMOGRAFI
 def data_demographi(df: pd.DataFrame):
     """
     Analisis demografi dataset perusahaan & pekerjaan.
@@ -67,7 +67,7 @@ def data_demographi(df: pd.DataFrame):
         print(df['company_revenue'].value_counts().head(5))
 
 
-# =============== 3. MAIN PROGRAM ===============
+#3. MAIN PROGRAM
 if __name__ == "__main__":
     # Lokasi file hasil cleaning
     base_dir = os.path.dirname(os.path.abspath(__file__))
